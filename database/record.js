@@ -2,10 +2,11 @@
 var db = require('../db');
 
 class Record {
-    constructor(model_name, model) {
+    constructor(model_name, model, additional_constrains) {
         this.model_name = model_name;
         this.model = model;
         this.attributes = Object.keys(model);
+        this.constraints = additional_constrains;
     }
 
     create() {
@@ -15,7 +16,11 @@ class Record {
             var type = this.model[attribute];
             create_table_attr.push(attribute + ' ' + type);
         }
-        var create_script = "CREATE TABLE " + this.model_name + " (id INTEGER PRIMARY KEY, " + create_table_attr.join(', ') + ")";
+        var create_script = "CREATE TABLE " + this.model_name + " (id INTEGER PRIMARY KEY, " + create_table_attr.join(', ');
+        if (this.constraints){
+            create_script += ", " + this.constraints;
+        }
+        create_script += ")";
         db.run(create_script);
         console.log(create_script);
     }

@@ -3,16 +3,19 @@ var Record = require('../database/record');
 var sqlite3 = require('sqlite3');
 var db = require('../db');
 var measurement_model = require('./measurement.js');
-var farmer_model = require('./user.js');
+var farmer_model = require('./farmer.js');
+var farmers_measurement_model = require('./farmers_measurement');
 
 var Measurement = new Record('measurements', measurement_model);
 var Farmer = new Record('farmers',  farmer_model);
+var FarmersMeasurement = new Record('farmers_measurements', farmers_measurement_model, "FOREIGN KEY(`measurement_id`) REFERENCES measurements(id), FOREIGN KEY(`farmers_email`) REFERENCES farmers(email)");
 var encryption = require('../encryption');
 
 var createDB = function() {
   db.serialize(function () {
     Measurement.create();
     Farmer.create();
+    FarmersMeasurement.create();
     var m1 = Measurement.new({
       value1:	4.4,
       value2:	5.5,
