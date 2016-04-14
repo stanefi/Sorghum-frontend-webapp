@@ -1,0 +1,10 @@
+<% content.title = "Users List" %>
+<h1>Users List</h1>
+<table>
+  <tr>
+    <th>User name</th>
+    <th>User type</th>
+    <th></th>
+  </tr>
+  <%= partial('farmers/_farmer', params.users); %>
+</table>

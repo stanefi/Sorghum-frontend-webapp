@@ -1,0 +1,166 @@
+
+body {
+    background-color: white;
+    color: #333;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container {
+    padding-left: 8px;
+}
+
+h1 {
+    font: 20px/20px 'Oswald', sans-serif;
+    color:#333;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+}
+
+h2 {
+    font: 17px/17px 'Oswald', sans-serif;
+    color:#6a6a6a;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font: 15px/15px 'Oswald', sans-serif;
+    color:#6a6a6a;
+    padding-bottom: 1px;
+}
+
+
+.btn {
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    font: 14px/14px 'Oswald', sans-serif;
+    text-align: center;
+    padding: 8px;
+    background-color: #34495e;
+    color: white;
+    max-width: 100px;
+    border: none;
+}
+
+form .btn {
+    display: inline;
+    max-width: 200px;
+}
+
+
+.btn-small {
+    display: inline;
+    margin: 8px;
+    max-width: 100px;
+    padding: 3px;
+}
+
+form {
+    font-family: 'Oswald', sans-serif;
+}
+
+form input[type="password"],
+form textarea,
+form input[type="text"]{
+    width: 400px;
+}
+
+form#new-comment-form input[type="text"]{
+    width: 200px;
+}
+
+.btn:hover {
+    background-color: #2c3e50;
+}
+
+.danger {
+    background-color: #e74c3c;
+}
+
+.danger:hover {
+    background-color: #c0392b;
+}
+
+.info {
+    background-color: #0fafdd;
+}
+
+.info:hover {
+    background-color: #2f89ac;
+}
+
+.success {
+    background-color: #1abc9c;
+}
+
+.success:hover {
+    background-color: #16a085;
+}
+
+.back {
+    text-align: left;
+    max-width: 50px;
+}
+
+
+table, th, td {
+    border: none;
+    border-collapse: collapse;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+th{
+    text-align: left;
+    text-transform: uppercase;
+    font: 14px/14px 'Oswald', sans-serif;
+    color: white;
+    background-color: #34495e;
+    height: 25px;
+}
+
+
+#new-comment-form > input[type="text"]:nth-child(2){
+    width: 200px !important;
+}
+
+#comment-field {
+    width: 440px !important;
+}
+
+tr:nth-child(odd) {
+    background-color: #ecf0f1;
+}
+
+div#snipped-widget-container {
+    display: none;
+    position: absolute;
+    min-width: 400px;
+    min-height: 400px;
+    left: 450px;
+    top: 80px;
+    background-color: white;
+    border: 2px solid #6a6a6a;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+div.post-content {
+    border-top: 1px solid #7f8c8d;
+    border-bottom: 1px solid #7f8c8d;
+    padding: 10px 0;
+}
+
+div#footer {
+    min-height: 30px;
+}
+
+div.user-panel {
+    margin: 2px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #6a6a6a;;
+}
+

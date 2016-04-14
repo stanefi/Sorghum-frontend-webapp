@@ -1,0 +1,40 @@
+<% content.title = "Editing measurement" %>
+
+<td><a class='btn back' href="/pages/<%= params.id %>">&larr; post</a></td>
+<h1>Editing "<%=params.title%>"</h1>
+<form action="/pages/<%=params.id%>/edit" method="POST">
+    <p>
+        <label for="title">Title:</label><br>
+        <input name="title" type="text" value="<%=params.title%>" required/>
+    </p>
+    <p>
+        Description: <br>
+        <textarea name="description" required><%=params.description%></textarea>
+    </p>
+    <p>
+        Content (use markdown syntax): <br>
+        <textarea id="post-content" rows="20" cols="60" name="content" required><%=params.content%></textarea>
+    </p>
+    <p>
+        <input class="btn success" type="submit" value="update post" />
+        <button class="btn info" id="show-widget">toggle code snipped</button>
+    </p>
+</form>
+
+<div id="snipped-widget-container">
+    <h2> Code snippet </h2>
+    <form id="snippet-widget">
+        <p>
+            <label for="language">Language</label><br>
+            <input name="language" type="text" required/>
+        </p>
+        <p>
+            Snippet <br>
+            <textarea id="code" rows="15" cols="60" name="code" required></textarea>
+        </p>
+        <p>
+            <input class="btn success submit" type="submit" value="add snipped"/>
+            <button class="btn info" id="load-code-button">load code</button>
+        </p>
+    </form>
+</div>

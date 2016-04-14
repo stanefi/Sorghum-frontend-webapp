@@ -1,0 +1,14 @@
+<% content.title = "Commenting measurement" %>
+
+<td><a class='btn back' href="/pages/<%= params.id %>">&larr; post</a></td>
+<h1>Commenting on "<%=params.title%>"</h1>
+<form action="/pages/<%=params.id%>/edit" method="POST">
+    <p>
+        Talk (use markdown syntax): <br>
+        <textarea id="post-content" rows="20" cols="60" name="talk" required><%=params.talk%></textarea>
+    </p>
+
+    <p>
+        <input class="btn success" type="submit" value="update post" />
+    </p>
+</form>

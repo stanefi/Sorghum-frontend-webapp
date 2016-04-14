@@ -1,0 +1,14 @@
+<a class='btn back' href="/measurements">&larr; index</a>
+<% content.title = "Page content" %>
+<h1><%= params.measurement.title %></h1>
+<dl>
+  <dt><strong>Description</strong></dt>
+    <dd><%= params.measurement.description %></dd>
+</dl>
+<div class="post-content">
+  <%= params.measurement.content %>
+  <a class='btn success' href="/pages/<%= params.measurement.id %>/talk">switch to talk</a>
+</div>
+
+<a class='btn info' href="/pages/<%= params.measurement.id %>/edit">edit content</a>
+

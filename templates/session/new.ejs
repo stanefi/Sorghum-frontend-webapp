@@ -1,0 +1,23 @@
+<h1>Log in</h1>
+<div class="message">
+    <%= params.message %>
+</div>
+<form action="/login" method="POST">
+    <p>
+        <label for="username">Username:
+            <input name="username" type="text">
+        </label>
+    </p>
+    <p>
+        <label for="password">Password:
+            <input name="password" type="password">
+        </label>
+    </p>
+    <p>
+        <input class="btn success submit" type="submit" value="Log In">
+    </p>
+</form>
+<p>
+    Don't have a account?
+    <a href="/signup">Sign up</a>
+</p>

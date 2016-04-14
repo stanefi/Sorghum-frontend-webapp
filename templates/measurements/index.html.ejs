@@ -1,0 +1,19 @@
+<% content.title = "Pages List" %>
+<%= params.user_panel %>
+<h1>Measurements</h1>
+<table>
+  <tr>
+    <th>Value 1</th>
+    <th>Value 2</th>
+    <th>Value 3</th>
+    <th>Value 4</th>
+    <th>Value 5</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <%= partial('measurements/_measurement', params.pages); %>
+</table>
+<a class="btn" href="/measurements/new">create page</a>
