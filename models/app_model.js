@@ -13,6 +13,7 @@ var encryption = require('../encryption');
 
 var createDB = function() {
   db.serialize(function () {
+    console.log("Creating a new database ...", "\n");
     Measurement.create();
     Farmer.create();
     FarmersMeasurement.create();
