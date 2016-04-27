@@ -1,10 +1,8 @@
 var $ = require('jquery');
-var hljs = require('highlight.js');
 
 $(function(){
     var comment_form = $('form#new-comment-form');
     if(comment_form){
-        hljs.initHighlightingOnLoad();
         comment_form.submit(function(event){
             event.preventDefault();
             submit_comment_form(comment_form);

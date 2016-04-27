@@ -7,7 +7,6 @@ var router = require('./router');
 var db = require('./db');
 var view = require('./view');
 var fs = require('fs');
-var code_css = fs.readFileSync('./node_modules/highlight.js/styles/xcode.css');;
 var sessions = require('client-sessions');
 
 // Enable sessions
@@ -17,11 +16,6 @@ app.use(sessions({
     duration: 24*60*60*1000,
     activeDuration: 1000*60*5
 }));
-
-router.addRoute('/code.css', 'GET', function(req, res) {
-    res.writeHead(200, {"Content-Type":"text/css"});
-    res.end(code_css);
-});
 
 var measurements_controller = require('./controllers/measurements_controller');
 router.addRoute('/', 'GET', measurements_controller.redirect);
@@ -44,6 +38,6 @@ app.use(express.static('assets'));
 app.use(router.route);
 
 app.listen(PORT, function () {
-    console.log('Wiki measurement app is running on port', PORT);
+    console.log('Sorghum frontend app is running on port', PORT);
 });
 
