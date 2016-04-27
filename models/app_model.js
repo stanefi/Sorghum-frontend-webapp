@@ -41,7 +41,7 @@ var createDB = function() {
 
     var salt1 = encryption.salt();
     var user1 = Farmer.new({
-      username: "admin@gmail.com",
+      email: "admin@gmail.com",
       password: encryption.digest('pass1234' + salt1),
       user_type: "admin",
       salt: salt1
@@ -50,7 +50,7 @@ var createDB = function() {
 
     var salt2 = encryption.salt();
     var user2 = Farmer.new({
-      username: "testuser@gmail.com",
+      email: "testuser@gmail.com",
       password: encryption.digest('pass' + salt2),
       user_type: "editor",
       salt: salt2
