@@ -1,28 +1,23 @@
 {
-  "title": "code_wiki",
+  "title": "Sorghum frontend web app",
   "version": "1.0.0",
-  "description": "Wiki for developers to share their ideas a source code",
+  "description": "No description",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "wiki",
-    "programing wiki",
-    "code snippet",
-    "source code",
     "web app",
-    "pages",
-    "code snippet widget",
-    "talks"
+    "farming"
   ],
   "author": "Filip Stanek",
   "license": "MIT",
-  "name": "wiki_page",
+  "name": "Sorghum-frontend-webapp",
   "dependencies": {
     "client-sessions": "^0.7.0",
     "express": "^4.13.4",
     "formidable": "^1.0.17",
+    "jquery": "^1.7.4",
     "marked": "^0.3.5",
     "sqlite3": "^3.1.1"
   },
