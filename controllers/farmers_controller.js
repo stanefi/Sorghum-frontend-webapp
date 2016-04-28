@@ -1,15 +1,15 @@
 "use strict";
 var view = require('../view');
 var formidable = require('formidable');
-var User = require('../models/app_model').farmer;
+var Farmer = require('../models/app_model').farmer;
 var encryption = require('../encryption');
 
-class CommentsController {
+class FarmersController {
     index(req, res){
-        if (!users_controller.admin_only(req, res)) return;
-        User.all(function (error, users) {
+        if (!farmers_controller.admin_only(req, res)) return;
+        Farmer.all(function (error, users) {
             if(error){
-                users_controller.render_error(res);
+                farmers_controller.render_error(res);
                 return;
             }
             res.writeHead(200, {"Content-Type": "text/html"});
@@ -20,7 +20,7 @@ class CommentsController {
     create(req, res, params) {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-            var new_user = User.new(fields);
+            var new_user = Farmer.new(fields);
             new_user.user_type = "editor";
             var salt = encryption.salt();
             new_user.password = encryption.digest(new_user.password + salt);
@@ -39,10 +39,10 @@ class CommentsController {
     }
 
     ban(req, res, params) {
-        if (!users_controller.admin_only(req, res)) return;
-        User.find(params.id, function (error, user) {
+        if (!farmers_controller.admin_only(req, res)) return;
+        Farmer.find(params.id, function (error, user) {
             if (error) {
-                users_controller.render_error(res);
+                farmers_controller.render_error(res);
                 return;
             }
             if(user.user_type != "admin") {
@@ -54,12 +54,12 @@ class CommentsController {
     }
 
     loadUser(req, res, next) {
-        if(req.session && req.session.user_id) {
-            User.find(req.session.user_id, function(error, user){
+        if(req.session && req.session.farmer_id) {
+            Farmer.find(req.session.farmer_id, function(error, farmer){
                 if(error) {
                     return res.sendStatus(500);
                 }
-                req.farmer = user;
+                req.farmer = farmer;
                 return next();
             });
         }
@@ -88,6 +88,6 @@ class CommentsController {
 
 }
 
-var users_controller = new CommentsController();
+var farmers_controller = new FarmersController();
 
-module.exports = exports = users_controller;
+module.exports = exports = farmers_controller;

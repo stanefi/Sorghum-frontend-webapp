@@ -119,7 +119,7 @@ class MeasurementsController {
             panel_html += "<a href='/login' class='btn success'>login</a>";
         }
         else{
-            panel_html += user.username + "<a href='/logout' class='btn info btn-small'>logout</a>";
+            panel_html += user.email + "<a href='/logout' class='btn info btn-small'>logout</a>";
         }
         return panel_html + "</div>";
     }
