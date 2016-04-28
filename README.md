@@ -26,3 +26,11 @@ Complete instructions manual for installing and configuring Sorghum-frontend app
 
 ## Compile client javascript
     browserify client/app.js > assets/bundle.js
+
+## Test users
+    email: admin@gmail.com
+    password: pass1234
+
+## Database seeds (test data)
+
+To add more test data: open models/app_model.js and edit addSeeds() function
