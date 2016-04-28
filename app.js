@@ -8,6 +8,8 @@ var db = require('./db');
 var view = require('./view');
 var fs = require('fs');
 var sessions = require('client-sessions');
+var farmers_controller = require('./controllers/farmers_controller');
+var measurements_controller = require('./controllers/measurements_controller');
 
 // Enable sessions
 app.use(sessions({
@@ -17,14 +19,24 @@ app.use(sessions({
     activeDuration: 1000*60*5
 }));
 
-var measurements_controller = require('./controllers/measurements_controller');
-router.addRoute('/', 'GET', measurements_controller.redirect);
-router.addResource('measurements', measurements_controller);
+app.use(farmers_controller.loadUser);
+app.use(express.static('assets'));
 
-var farmers_controller = require('./controllers/farmers_controller');
-router.addRoute('/farmers/:id/ban', 'GET', farmers_controller.ban);
-router.addRoute('/signup', 'GET', farmers_controller.signup);
-router.addResource('farmers', farmers_controller);
+
+// router.addRoute('/', 'GET', measurements_controller.redirect);
+// router.addResource('measurements', measurements_controller);
+
+app.get('/', measurements_controller.redirect);
+app.get('/measurements', measurements_controller.index);
+app.get('/measurements/:id', measurements_controller.show);
+app.get('/measurements/:id/edit', measurements_controller.edit);
+
+app.get('/signup', farmers_controller.signup);
+
+
+// router.addRoute('/farmers/:id/ban', 'GET', farmers_controller.ban);
+// // router.addRoute('/signup', 'GET', farmers_controller.signup);
+// router.addResource('farmers', farmers_controller);
 
 // Login routes
 var session = require('./session');
@@ -33,9 +45,7 @@ app.post('/login', session.create);
 app.get('/logout', session.destroy);
 
 
-app.use(farmers_controller.loadUser);
-app.use(express.static('assets'));
-app.use(router.route);
+// app.use(router.route);
 
 app.listen(PORT, function () {
     console.log('Sorghum frontend app is running on port', PORT);

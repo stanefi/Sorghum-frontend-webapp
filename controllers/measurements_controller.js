@@ -16,8 +16,8 @@ class MeasurementsController {
         });
     }
 
-    show(req, res, params) {
-        Measurements.find(params.id, function (error, measurement) {
+    show(req, res) {
+        Measurements.find(req.params.id, function (error, measurement) {
             if(error){
                 measurements_controller.render_error(res);
                 return;
@@ -33,9 +33,9 @@ class MeasurementsController {
         res.end(view.render('measurements/new'));
     }
 
-    edit(req, res, params){
+    edit(req, res){
         if (!measurements_controller.editor_only(req, res)) return;
-        Measurements.find(params.id, function (error, measurement) {
+        Measurements.find(req.params.id, function (error, measurement) {
             if(error){
                 measurements_controller.render_error(res);
                 return;
@@ -61,7 +61,7 @@ class MeasurementsController {
                     res.redirect(location);
                 }
                 else {
-                    measurements_controller.redirect_to_page(req, res, measurement.id);
+                    measurements_controller.redirect_to_measurment(req, res, measurement.id);
                 }
             });
         });
@@ -94,7 +94,7 @@ class MeasurementsController {
         res.redirect('/measurements');
     }
 
-    redirect_to_page(req, res, page_id) {
+    redirect_to_measurment(req, res, page_id) {
         var location = '/measurements/' + Number(page_id);
         res.redirect(location);
     }
