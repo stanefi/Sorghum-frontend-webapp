@@ -1,8 +1,8 @@
 <% content.title = "Editing measurement" %>
 
-<td><a class='btn back' href="/pages/<%= params.id %>">&larr; post</a></td>
+<td><a class='btn back' href="/measurements/<%= params.id %>">&larr; post</a></td>
 <h1>Editing "<%=params.title%>"</h1>
-<form action="/pages/<%=params.id%>/edit" method="POST">
+<form action="/measurements/<%=params.id%>/edit" method="POST">
     <p>
         <label for="title">Title:</label><br>
         <input name="title" type="text" value="<%=params.title%>" required/>

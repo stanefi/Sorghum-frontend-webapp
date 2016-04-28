@@ -29,9 +29,11 @@ app.use(express.static('assets'));
 app.get('/', measurements_controller.redirect);
 app.get('/measurements', measurements_controller.index);
 app.get('/measurements/:id', measurements_controller.show);
+app.post('/measurements/:id', measurements_controller.update);
 app.get('/measurements/:id/edit', measurements_controller.edit);
 
 app.get('/signup', farmers_controller.signup);
+app.post('/farmers', farmers_controller.create);
 
 
 // router.addRoute('/farmers/:id/ban', 'GET', farmers_controller.ban);

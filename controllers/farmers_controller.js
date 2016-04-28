@@ -17,7 +17,7 @@ class FarmersController {
         });
     }
 
-    create(req, res, params) {
+    create(req, res) {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
             var new_user = Farmer.new(fields);
@@ -27,7 +27,7 @@ class FarmersController {
             new_user.salt = salt;
             new_user.user_type = "editor";
             new_user.save(function(id){
-                req.session.user_id = id;
+                req.session.farmer_id = id;
                 res.redirect("/measurements");
             });
         });
