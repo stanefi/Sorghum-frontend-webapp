@@ -46,6 +46,10 @@ app.get('/login', session.new);
 app.post('/login', session.create);
 app.get('/logout', session.destroy);
 
+// Data export route
+var dataExport = require('./controllers/dataExport');
+app.post('/measurements', dataExport.exportAll);
+
 
 // app.use(router.route);
 
