@@ -13,7 +13,8 @@ class DataExport {
 
     exportAll(req, res) {
         Measurement.all(function(error, records) {
-            var csvContent = "data:text/csv;charset=utf-8,";
+            var csvContent = "data:text/csv;charset=utf-8\n" +
+                "value1,value2,value3,value4,value5\n"; // collumns
 
             records.forEach(function(record, index) {
                 var dataString = record.value1 + ',' + record.value2 + ',' +
@@ -24,8 +25,8 @@ class DataExport {
                 'Content-Type': 'application/force-download',
                 'Content-disposition':'attachment; filename=export.csv'
             });
-            var encodedUri = encodeURI(csvContent);
-            res.end(encodedUri);
+            //var encodedUri = encodeURI(csvContent);
+            res.end(csvContent);
         });
 
 
