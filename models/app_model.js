@@ -26,23 +26,30 @@ var createDB = function() {
 // Add test data here:
 function addSeeds() {
   var m1 = Measurement.new({
-    value1:	4.4,
-    value2:	5.5,
-    value3:	5.5,
-    value4:	5.5,
-    value5:	5.5,
+    ACRES:	2.4,
+    HEADS_PER_ACRE:	800,
+    ROW_SPACING:	15,
+    APP_AREA:	2.5,
+    SEEDS_PER_POUND:	9000,
     longitude: 0.0,
     latitude:  0.0,
     date_time: "2016-06-03 03:12:00.000",
     image_path: "test.jpg"
   });
   m1.save();
+  /*ACRES:	"FLOAT NOT NULL",
+   HEADS_PER_ACRE:	"INTEGER NOT NULL",
+   ROW_SPACING:	"INTEGER NOT NULL",
+   APP_AREA:	"FLOAT NOT NULL",
+   SEEDS_PER_POUND:	"FLOAT NOT NULL",
+  *
+  * */
   var m2 = Measurement.new({
-    value1:	1.4,
-    value2:	3.5,
-    value3:	2.5,
-    value4:	2.5,
-    value5:	3.5,
+    ACRES:	1.4,
+    HEADS_PER_ACRE:	500,
+    ROW_SPACING:	7.5,
+    APP_AREA:	2.5,
+    SEEDS_PER_POUND:	9000,
     longitude: 0.0,
     latitude:  0.0,
     date_time: "2016-06-03 04:12:00.000",
