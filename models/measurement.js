@@ -6,6 +6,7 @@ var Measurement = {
   value5:	"FLOAT NOT NULL",
   longitude: "decimal(12,9)",
   latitude:  "decimal(12,9)",
+  date_time: "TEXT",
   image_path: "TEXT"
 };
 

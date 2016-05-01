@@ -4,6 +4,8 @@
   <td><%= params.value3 %></td>
   <td><%= params.value4 %></td>
   <td><%= params.value5 %></td>
+  <td><%= params.date_time.substr(0,params.date_time.indexOf(' ')) %></td>
+  <td><%= params.date_time.substr(params.date_time.indexOf(' '),6) %></td>
   <td><%= params.longitude %></td>
   <td><%= params.latitude %></td>
   <td><a class='btn success' href="/measurements/<%= params.id %>">show</a></td>

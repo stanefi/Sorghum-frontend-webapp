@@ -33,6 +33,7 @@ function addSeeds() {
     value5:	5.5,
     longitude: 0.0,
     latitude:  0.0,
+    date_time: "2016-06-03 03:12:00.000",
     image_path: "test.jpg"
   });
   m1.save();
@@ -44,6 +45,7 @@ function addSeeds() {
     value5:	3.5,
     longitude: 0.0,
     latitude:  0.0,
+    date_time: "2016-06-03 04:12:00.000",
     image_path: "test2.jpg"
   });
   m2.save();
