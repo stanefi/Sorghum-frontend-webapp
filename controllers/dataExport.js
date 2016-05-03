@@ -14,11 +14,11 @@ class DataExport {
     exportAll(req, res) {
         Measurement.all(function(error, records) {
             var csvContent = "data:text/csv;charset=utf-8\n" +
-                "value1,value2,value3,value4,value5\n"; // collumns
+                "ACRES,HEADS_PER_ACRE,ROW_SPACING,APP_AREA,SEEDS_PER_POUND\n"; // collumns
 
             records.forEach(function(record, index) {
-                var dataString = record.value1 + ',' + record.value2 + ',' +
-                    record.value3 + ',' + record.value4 + ',' + record.value5;
+                var dataString = record.ACRES + ',' + record.HEADS_PER_ACRE + ',' +
+                    record.ROW_SPACING + ',' + record.APP_AREA + ',' + record.SEEDS_PER_POUND;
                 csvContent += index < records.length ? dataString + '\n' : dataString;
             });
             res.writeHead(200, {
