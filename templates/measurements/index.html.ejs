@@ -1,6 +1,29 @@
 <% content.title = "Sorghum - Measurements" %>
 <%= params.user_panel %>
 <h1>Measurements</h1>
+<!--Charts-->
+X-Axis <br />
+<form name="xAxisForm">
+  <input type="radio" name="xAxis"  value="1" checked="checked"/> ACRES
+  <input type="radio" name="xAxis"  value="2" /> HEADS PER ACRE
+  <input type="radio" name="xAxis"  value="3" /> ROW SPACING
+</form>
+
+Y-Axis <br />
+<form name="yAxisForm">
+  <input type="radio" name="yAxis"  value="4" checked="checked"/> APP AREA
+  <input type="radio" name="yAxis"  value="5" /> SEEDS PER POUND
+</form>
+<br />
+
+<script src="/charts.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<button type="button" onclick="loadChart()" id="chart">Load Chart</button>
+<br />
+
+
+
+<!--Charts end-->
 <table>
   <tr>
     <th>ACRES</th>
