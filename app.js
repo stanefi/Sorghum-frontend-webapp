@@ -30,6 +30,7 @@ app.get('/measurements/:id/delete', measurements_controller.destroy);
 
 // Data export route
 app.post('/measurements', measurements_controller.export_data);
+app.get('/graphData/:x/:y', measurements_controller.sendChartData);
 
 app.get('/signup', farmers_controller.signup);
 app.post('/farmers', farmers_controller.create);

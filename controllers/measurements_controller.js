@@ -38,7 +38,7 @@ class MeasurementsController
         });
     }
     
-    // Exporting measurements to cvs
+    // Exporting measurements to csv
     export_data(req, res) {
         if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.all(function(error, records) {
@@ -54,9 +54,15 @@ class MeasurementsController
                 'Content-Type': 'application/force-download',
                 'Content-disposition':'attachment; filename=export.csv'
             });
-            //var encodedUri = encodeURI(csvContent);
             res.end(csvContent);
         });
+    }
+
+    sendChartData(req, res) {
+        console.log("request recieved: " + req.params.x + ", " + req.params.y);
+        var string = "Testing string";
+        res.writeHead(200, {"Content-Type": "text/plain"});
+        res.end(string);
     }
     
 
