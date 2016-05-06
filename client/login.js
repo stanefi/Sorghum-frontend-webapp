@@ -18,6 +18,10 @@ module.exports = exports = function() {
         elem.append($ripple);
     };
 
+    if ($('.login_error').is(':empty')){
+        $('.login_error').hide();
+    }
+
     $(document).on("click", ".login__submit", function(e) {
         if (animating) return;
         animating = true;
