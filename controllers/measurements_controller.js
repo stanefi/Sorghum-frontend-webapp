@@ -36,6 +36,28 @@ class MeasurementsController
         });
     }
 
+
+    // Exporting measurements to cvs
+    export_data(req, res) {
+        Measurements.all(function(error, records) {
+            var csvContent = "data:text/csv;charset=utf-8\n" +
+                "ACRES,HEADS_PER_ACRE,ROW_SPACING,APP_AREA,SEEDS_PER_POUND\n"; // collumns
+
+            records.forEach(function(record, index) {
+                var dataString = record.ACRES + ',' + record.HEADS_PER_ACRE + ',' +
+                    record.ROW_SPACING + ',' + record.APP_AREA + ',' + record.SEEDS_PER_POUND;
+                csvContent += index < records.length ? dataString + '\n' : dataString;
+            });
+            res.writeHead(200, {
+                'Content-Type': 'application/force-download',
+                'Content-disposition':'attachment; filename=export.csv'
+            });
+            //var encodedUri = encodeURI(csvContent);
+            res.end(csvContent);
+        });
+    }
+    
+
     redirect(req, res) {
         res.redirect('/measurements');
     }
