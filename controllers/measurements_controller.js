@@ -1,18 +1,16 @@
 "use strict";
 var view = require('../view');
-var formidable = require('formidable');
 var Measurements = require('../models/app_model').measurement;
-var marked = require("marked");
 
-class MeasurementsController {
+class MeasurementsController 
+{
     index(req, res) {
         Measurements.all(function (error, measurements) {
             if(error){
                 measurements_controller.render_error();
                 return;
             }
-            res.writeHead(200, {"Content-Type": "text/html"});
-            res.end(view.render('measurements/index', {pages: measurements, user_panel: measurements_controller.generate_user_panel_html(req.farmer)}));
+            res.send(view.render('measurements/index', { pages: measurements, user_panel: measurements_controller.generate_user_panel_html(req.farmer)}));
         });
     }
 
@@ -22,71 +20,19 @@ class MeasurementsController {
                 measurements_controller.render_error(res);
                 return;
             }
-            res.writeHead(200, {"Content-Type": "text/html"});
-            res.end(view.render('measurements/show', {measurement: measurement}));
+            res.send(view.render('measurements/show', {measurement: measurement}));
         });
     }
 
-    new(req, res) {
+    destroy(req, res) {
         if (!measurements_controller.editor_only(req, res)) return;
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.end(view.render('measurements/new'));
-    }
-
-    edit(req, res){
-        if (!measurements_controller.editor_only(req, res)) return;
-        Measurements.find(req.params.id, function (error, measurement) {
-            if(error){
-                measurements_controller.render_error(res);
-                return;
-            }
-            res.writeHead(200, {"Content-Type": "text/html"});
-            res.end(view.render('measurements/edit', measurement));
-        });
-    }
-
-    update(req, res, params) {
-        if (!measurements_controller.editor_only(req, res)) return;
-        Measurements.find(params.id, function(error, measurement){
-            if(error){
-                measurements_controller.render_error(res);
-                return;
-            }
-            var form = new formidable.IncomingForm();
-            form.parse(req, function (err, fields, files) {
-                measurement.update(fields);
-                measurement.save();
-                if(fields.talk){
-                    var location = '/measurements/' + Number(measurement.id) + '/talk';
-                    res.redirect(location);
-                }
-                else {
-                    measurements_controller.redirect_to_measurment(req, res, measurement.id);
-                }
-            });
-        });
-    }
-
-    create(req, res) {
-        if (!measurements_controller.editor_only(req, res)) return;
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            var new_page = Measurements.new(fields);
-            new_page.talk = "";
-            new_page.save();
-            measurements_controller.redirect(req, res);
-        });
-    }
-
-    destroy(req, res, params) {
-        if (!measurements_controller.editor_only(req, res)) return;
-        Measurements.find(params.id, function(error, measurement){
+        Measurements.find(req.params.id, function(error, measurement){
             if(error){
                 measurements_controller.render_error(res);
                 return;
             }
             measurement.destroy();
-            measurements_controller.index(req, res);
+            measurements_controller.redirect(req, res);
         });
     }
 

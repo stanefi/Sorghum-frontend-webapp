@@ -23,22 +23,14 @@ app.use(farmers_controller.loadUser);
 app.use(express.static('assets'));
 
 
-// router.addRoute('/', 'GET', measurements_controller.redirect);
-// router.addResource('measurements', measurements_controller);
-
 app.get('/', measurements_controller.redirect);
 app.get('/measurements', measurements_controller.index);
 app.get('/measurements/:id', measurements_controller.show);
-app.post('/measurements/:id', measurements_controller.update);
-app.get('/measurements/:id/edit', measurements_controller.edit);
+app.get('/measurements/:id/delete', measurements_controller.destroy);
 
 app.get('/signup', farmers_controller.signup);
 app.post('/farmers', farmers_controller.create);
 
-
-// router.addRoute('/farmers/:id/ban', 'GET', farmers_controller.ban);
-// // router.addRoute('/signup', 'GET', farmers_controller.signup);
-// router.addResource('farmers', farmers_controller);
 
 // Login routes
 var session = require('./session');
