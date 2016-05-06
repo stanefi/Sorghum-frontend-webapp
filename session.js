@@ -19,17 +19,17 @@ class Session {
       if(err) return res.sendStatus(500);
       Farmer.where("email ='" + fields.email + "'", function (err, farmers) {
         if(err) {
-          return res.end(view.render('session/new', {
+          return res.end(view.partial('session/new', {
             message: "Username/Password not found.  Please try again.",
             farmer: req.farmer
           }));
         }
         var farmer = farmers[0];
         if(!farmer){
-          return res.end(view.render('session/new', {message: "Username/Password not found.  Please try again.", user: req.farmer}));
+          return res.end(view.partial('session/new', {message: "Username/Password not found.  Please try again.", user: req.farmer}));
         }
         if(farmer.password != encryption.digest(fields.password + farmer.salt)) {
-          return res.end(view.render('session/new', {
+          return res.end(view.partial('session/new', {
             message: "Username/Password not found.  Please try again.",
             farmer: req.farmer
           }));
