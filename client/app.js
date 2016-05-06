@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var login = require('./login');
 
 $(function(){
     var comment_form = $('form#new-comment-form');
@@ -31,6 +32,7 @@ $(function(){
             code_area.val(code_area.val() + '\n' + get_code_snippets());
         });
     }
+    login();
 });
 
 function submit_comment_form(form){

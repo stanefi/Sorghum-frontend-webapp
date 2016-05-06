@@ -1,5 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var $ = require('jquery');
+var login = require('./login');
 
 $(function(){
     var comment_form = $('form#new-comment-form');
@@ -32,6 +33,7 @@ $(function(){
             code_area.val(code_area.val() + '\n' + get_code_snippets());
         });
     }
+    login();
 });
 
 function submit_comment_form(form){
@@ -85,7 +87,52 @@ function add_snippet(snippet_form){
 function get_code_snippets(){
     return $('<div>' + $('textarea#post-content').val() + '</div>').find('pre code').text();
 }
-},{"jquery":2}],2:[function(require,module,exports){
+},{"./login":2,"jquery":3}],2:[function(require,module,exports){
+var $ = require('jquery');
+module.exports = exports = function() {
+    var animating = false,
+        submitPhase1 = 1100,
+        submitPhase2 = 400,
+        logoutPhase1 = 800,
+        $login = $(".login"),
+        $app = $(".app");
+
+    function ripple(elem, e) {
+        $(".ripple").remove();
+        var elTop = elem.offset().top,
+            elLeft = elem.offset().left,
+            x = e.pageX - elLeft,
+            y = e.pageY - elTop;
+        var $ripple = $("<div class='ripple'></div>");
+        $ripple.css({top: y, left: x});
+        elem.append($ripple);
+    };
+
+    $(document).on("click", ".login__submit", function(e) {
+        if (animating) return;
+        animating = true;
+        var that = this;
+        ripple($(that), e);
+        $(that).addClass("processing");
+        setTimeout(function() {
+            $(that).addClass("success");
+            setTimeout(function() {
+                $app.show();
+                $app.css("top");
+                $app.addClass("active");
+                $('form').submit();
+            }, submitPhase2 - 70);
+            setTimeout(function() {
+                $login.hide();
+                $login.addClass("inactive");
+                animating = false;
+                $(that).removeClass("success processing");
+
+            }, submitPhase2);
+        }, submitPhase1);
+    });
+};
+},{"jquery":3}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.12.3
  * http://jquery.com/

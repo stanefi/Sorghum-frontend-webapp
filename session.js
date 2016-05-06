@@ -9,7 +9,7 @@ class Session {
 
   new(req, res) {
     res.writeHead(200, {"Content-Type": "text/html"});
-    res.end(view.render('session/new', {message: "", user: req.farmer}));
+    res.end(view.partial('session/new', {message: "", user: req.farmer}));
   }
 
   create(req, res, next) {
