@@ -5,6 +5,7 @@ var Measurements = require('../models/app_model').measurement;
 class MeasurementsController 
 {
     index(req, res) {
+        if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.all(function (error, measurements) {
             if(error){
                 measurements_controller.render_error();
@@ -15,6 +16,7 @@ class MeasurementsController
     }
 
     show(req, res) {
+        if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.find(req.params.id, function (error, measurement) {
             if(error){
                 measurements_controller.render_error(res);
@@ -25,7 +27,7 @@ class MeasurementsController
     }
 
     destroy(req, res) {
-        if (!measurements_controller.editor_only(req, res)) return;
+        if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.find(req.params.id, function(error, measurement){
             if(error){
                 measurements_controller.render_error(res);
@@ -35,10 +37,10 @@ class MeasurementsController
             measurements_controller.redirect(req, res);
         });
     }
-
-
+    
     // Exporting measurements to cvs
     export_data(req, res) {
+        if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.all(function(error, records) {
             var csvContent = "data:text/csv;charset=utf-8\n" +
                 "ACRES,HEADS_PER_ACRE,ROW_SPACING,APP_AREA,SEEDS_PER_POUND\n"; // collumns
@@ -72,12 +74,11 @@ class MeasurementsController
         res.end("<h1>Resource Not Found</h1>");
     }
 
-    editor_only(req, res){
+    user_logged_in(req, res){
         if(req.farmer && (req.farmer.user_type == "editor" || req.farmer.user_type == "admin")) {
             return true;
         }
-        res.writeHead(403, {"Content-Type":"text/html"});
-        res.end("<h1>Forbidden</h1>");
+        res.redirect("/login");
         return false;
     }
 
