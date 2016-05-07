@@ -59,10 +59,42 @@ class MeasurementsController
     }
 
     sendChartData(req, res) {
+        Measurements.all(function (error, records) {
+            res.writeHead(200, {"Content-Type": "application/json"});
+            var json = JSON.stringify({
+                xAxis: measurements_controller.mapRadioButtonValueToQueryResultItem(req.params.x, records),
+                yAxis: measurements_controller.mapRadioButtonValueToQueryResultItem(req.params.y, records)
+            });
+            res.end(json);
+        });
+
+
         console.log("request recieved: " + req.params.x + ", " + req.params.y);
-        var string = "Testing string";
-        res.writeHead(200, {"Content-Type": "text/plain"});
-        res.end(string);
+        //var string = "Testing string";
+        //res.writeHead(200, {"Content-Type": "text/plain"});
+        //res.end(string);
+    }
+
+    mapRadioButtonValueToQueryResultItem(number, records) {
+        if (number == 1) {
+            return {values: records.map(function(row) {return row.ACRES;}), name: "ACRES"};
+        } else if (number == 2) {
+            return {values: records.map(function(row) {return row.HEADS_PER_ACRE;}), name: "HEADS_PER_ACRE"};
+        } else if (number == 3) {
+            return {values: records.map(function(row) {return row.ROW_SPACING;}), name: "ROW_SPACING"};
+        } else if (number == 4) {
+            return {values: records.map(function(row) {return row.APP_AREA;}), name: "APP_AREA"};
+        } else if (number == 5) {
+            return {values: records.map(function(row) {return row.SEEDS_PER_POUND;}), name: "SEEDS_PER_POUND"};
+        }
+    }
+
+    getColumnFrom2dArray(matrix, col){
+        var column = [];
+        for(var i=0; i<matrix.length; i++){
+            column.push(matrix[i][col]);
+         }
+        return column;
     }
     
 
