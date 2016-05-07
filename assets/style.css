@@ -3,10 +3,7 @@ body {
     background-color: white;
     color: #333;
     font-family: 'Source Sans Pro', sans-serif;
-}
-
-.container {
-    padding-left: 8px;
+    padding-top: 70px;
 }
 
 h1 {
@@ -110,6 +107,10 @@ table, th, td {
     padding-right: 8px;
 }
 
+table {
+    width: 100%;
+}
+
 th{
     text-align: left;
     text-transform: uppercase;
@@ -132,20 +133,6 @@ tr:nth-child(odd) {
     background-color: #ecf0f1;
 }
 
-div#snipped-widget-container {
-    display: none;
-    position: absolute;
-    min-width: 400px;
-    min-height: 400px;
-    left: 450px;
-    top: 80px;
-    background-color: white;
-    border: 2px solid #6a6a6a;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-}
 
 div.post-content {
     border-top: 1px solid #7f8c8d;
