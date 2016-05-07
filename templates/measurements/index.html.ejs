@@ -1,5 +1,4 @@
-<% content.title = "Measurements" %>
-<%= params.user_panel %>
+<% content.title = "Sorghum - Measurements" %>
 <h1>Measurements</h1>
 <!--Charts-->
 X-Axis <br />
@@ -17,7 +16,7 @@ Y-Axis <br />
 <br />
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<button type="button" onclick="loadChart()" id="chart">Load Chart</button>
+<button class="btn success" type="button" onclick="loadChart()" id="chart">Load Chart</button>
 <br />
 <script src="/charts.js"></script>
 
@@ -46,3 +45,10 @@ Y-Axis <br />
 <form action="/measurements" method="POST">
   <button class="btn info" type="submit" onclick="exportData()" id="exportButton">Export data</button>
 </form>
+
+<!--Map-->
+<div id="map"></div>
+<script type="text/javascript" src="/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTQdmVDU5huIguIHEqcyzVl0grIWQgR7M&callback=initMap"
+async defer></script>
+<!--Map end-->

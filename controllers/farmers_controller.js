@@ -37,22 +37,7 @@ class FarmersController {
         res.writeHead(200, {"Content-Type": "text/html"});
         res.end(view.render('farmers/signup', {}));
     }
-
-    ban(req, res, params) {
-        if (!farmers_controller.admin_only(req, res)) return;
-        Farmer.find(params.id, function (error, user) {
-            if (error) {
-                farmers_controller.render_error(res);
-                return;
-            }
-            if(user.user_type != "admin") {
-                user.user_type = "banned";
-                user.save();
-            }
-            res.redirect('/farmers');
-        });
-    }
-
+    
     loadUser(req, res, next) {
         if(req.session && req.session.farmer_id) {
             Farmer.find(req.session.farmer_id, function(error, farmer){

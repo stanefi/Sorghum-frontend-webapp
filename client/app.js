@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var login = require('./login');
+var bootstrap = require('./bootstrap');
 
 $(function(){
     var comment_form = $('form#new-comment-form');
@@ -33,6 +34,7 @@ $(function(){
         });
     }
     login();
+    bootstrap();
 });
 
 function submit_comment_form(form){

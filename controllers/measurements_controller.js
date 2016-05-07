@@ -4,6 +4,7 @@ var Measurements = require('../models/app_model').measurement;
 
 class MeasurementsController 
 {
+    // Render index page with all the measurements (accessibly only by logged user)
     index(req, res) {
         if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.all(function (error, measurements) {
@@ -11,10 +12,11 @@ class MeasurementsController
                 measurements_controller.render_error();
                 return;
             }
-            res.send(view.render('measurements/index', { pages: measurements, user_panel: measurements_controller.generate_user_panel_html(req.farmer)}));
+            res.send(view.render('measurements/index', { pages: measurements, user_panel: measurements_controller.generate_user_panel_html(req.farmer), current_user: req.farmer}));
         });
     }
 
+    // Shows a measurement (accessibly only by logged user)
     show(req, res) {
         if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.find(req.params.id, function (error, measurement) {
@@ -26,6 +28,7 @@ class MeasurementsController
         });
     }
 
+    // Removes a measurement (accessibly only by logged user)
     destroy(req, res) {
         if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.find(req.params.id, function(error, measurement){
@@ -37,8 +40,8 @@ class MeasurementsController
             measurements_controller.redirect(req, res);
         });
     }
-    
-    // Exporting measurements to csv
+
+    // Export of all the measurements to cvs (accessibly only by logged user)
     export_data(req, res) {
         if (!measurements_controller.user_logged_in(req, res)) return;
         Measurements.all(function(error, records) {
