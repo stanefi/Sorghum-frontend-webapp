@@ -1,5 +1,4 @@
 function initMap() {
-
   // Threshold of color change depending on the yield
   const YIELD_THRESHOLD = [0,10,20,30,40,50,60,70,80,90];
   const COLOR = ['#ff0000','#ff4000','#ff8000','#ffbf00','#ffff00','#dfff00','#bfff00','#80ff00','#40ff00','#00ff00'];
@@ -100,5 +99,4 @@ function initMap() {
   }]
 });
 layer.setMap(map);
-
 }
