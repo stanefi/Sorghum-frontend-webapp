@@ -94,6 +94,12 @@ class MeasurementsController
         //res.end(string);
     }
 
+    // Shows the map
+    map(req, res) {
+      if (!measurements_controller.user_logged_in(req, res)) return;
+        res.send(view.render('measurements/map', { user_panel: measurements_controller.generate_user_panel_html(req.farmer), current_user: req.farmer}));
+    }
+
     mapRadioButtonValueToQueryResultItem(number, records) {
         if (number == 1) {
             return {values: records.map(function(row) {return row.ACRES;}), name: "ACRES"};

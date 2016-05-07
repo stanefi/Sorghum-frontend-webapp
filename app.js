@@ -31,6 +31,7 @@ app.get('/measurements/:id/delete', measurements_controller.destroy);
 // Data export route
 app.post('/measurements', measurements_controller.export_data);
 app.get('/graphData/:x/:y', measurements_controller.sendChartData);
+app.get('/map', measurements_controller.map);
 
 app.get('/signup', farmers_controller.signup);
 app.post('/farmers', farmers_controller.create);
@@ -46,4 +47,3 @@ app.get('/logout', session.destroy);
 app.listen(PORT, function () {
     console.log('Sorghum frontend app is running on port', PORT);
 });
-
