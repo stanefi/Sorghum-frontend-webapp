@@ -20,7 +20,7 @@ class MeasurementsController
             console.log(err);
             measurements[index].county = 'n/a';
           } else {
-            measurements[index].county = data.results[3].address_components[0].long_name;
+//            measurements[index].county = data.results[3].address_components[0].long_name;
           }
           counter++;
           if(counter >= measurements.length){
