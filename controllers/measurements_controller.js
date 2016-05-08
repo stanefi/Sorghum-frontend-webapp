@@ -96,12 +96,6 @@ class MeasurementsController
             });
             res.end(json);
         });
-
-
-        console.log("request recieved: " + req.params.x + ", " + req.params.y);
-        //var string = "Testing string";
-        //res.writeHead(200, {"Content-Type": "text/plain"});
-        //res.end(string);
     }
 
     // Shows the map
