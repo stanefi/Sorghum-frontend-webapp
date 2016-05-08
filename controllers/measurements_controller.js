@@ -15,12 +15,22 @@ class MeasurementsController
       }
       var counter = 0;
       measurements.forEach(function(measurement, index, array){
-        geocoder.reverseGeocode( measurement.latitude, measurement.longitude, function ( err, data ) {
+          var latParts = measurement.latitude.split(/[^\d\w]+/);
+          var lonParts = measurement.longitude.split(/[^\d\w]+/);
+          var lat = ConvertDMSToDD(latParts[0], latParts[1], latParts[2], latParts[3]);
+          var lng = ConvertDMSToDD(lonParts[0], lonParts[1], lonParts[2], lonParts[3]);
+        // tady sem proste swapnul lng a lat, prvni ma bejt lat ale to je u nas lng... sem dement
+        geocoder.reverseGeocode( lng, lat, function ( err, data ) {
           if(err){
             console.log(err);
             measurements[index].county = 'n/a';
           } else {
-//            measurements[index].county = data.results[3].address_components[0].long_name;
+            if(!data.status.localeCompare("OVER_QUERY_LIMIT")) {
+             // measurements[index].county = data.results[3].address_components[0].long_name;
+            }
+            else{
+              measurements[index].county = "no info";
+            }
           }
           counter++;
           if(counter >= measurements.length){
@@ -156,7 +166,19 @@ class MeasurementsController
     return panel_html + "</div>";
   }
 
+
+
 }
+function   ConvertDMSToDD(degrees, minutes, seconds, direction) {
+  var dd = parseInt(degrees) + parseInt(minutes)/60 + parseInt(seconds)/(60*60);
+
+  if (direction == "S" || direction == "W") {
+    dd = dd * -1;
+  } // Don't do anything for N or E
+  return dd;
+}
+
+
 var measurements_controller = new MeasurementsController();
 
 module.exports = exports = measurements_controller;
