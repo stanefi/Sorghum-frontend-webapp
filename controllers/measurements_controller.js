@@ -87,6 +87,11 @@ class MeasurementsController
     });
   }
 
+  /**
+   *  Returns an object containing two other objects
+   *  each containing an array of data for the x/y axis
+   *  and its description to be rendered on the plot
+     */
     sendChartData(req, res) {
         Measurements.all(function (error, records) {
             res.writeHead(200, {"Content-Type": "application/json"});
@@ -104,6 +109,15 @@ class MeasurementsController
         res.send(view.render('measurements/map', { user_panel: measurements_controller.generate_user_panel_html(req.farmer), current_user: req.farmer}));
     }
 
+  /**
+   * Maps a column of a database query into an array and
+   * returns it with its description as an object
+   *
+   * @param number Number of a selected radio button
+   * @param records Result of a database query
+   * @returns {*} Column of a database query as an array
+   * along with its description
+     */
     mapRadioButtonValueToQueryResultItem(number, records) {
         if (number == 1) {
             return {values: records.map(function(row) {return row.ACRES;}), name: "ACRES"};
