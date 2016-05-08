@@ -1,9 +1,6 @@
 /**
  * Created by Milan on 6.5.2016.
  */
-/**
- * Created by Milan on 25.4.2016.
- */
 google.charts.load('current', {'packages': ['corechart']});
 
 
@@ -23,14 +20,15 @@ for(var i = 0; i < yAxis.length; i++) {
 
 function drawChart(result) {
     var joinedArr = [];
-    joinedArr[0] = ['', ''];
+    joinedArr[0] = [result.xAxis.name, result.yAxis.name];
     for (var i = 0; i < result.xAxis.values.length; i ++) {
         joinedArr[i+1] = [result.xAxis.values[i], result.yAxis.values[i]];
     }
     var data = google.visualization.arrayToDataTable(joinedArr);
     var options = {
-        title: 'Line Chart',
-        curveType: 'function',
+        title: 'Scatter Chart',
+        //curveType: 'function', // for line charts
+        pointSize: 4,
         legend: 'none',
         width: 500,
         height: 400,
@@ -41,7 +39,7 @@ function drawChart(result) {
             title: result.yAxis.name
         }
     };
-    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    var chart = new google.visualization.ScatterChart(document.getElementById('chart'));
     chart.draw(data, options);
 }
 
