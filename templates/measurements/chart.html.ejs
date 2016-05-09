@@ -1,0 +1,19 @@
+<h1>Measurements Data Chart</h1>
+X-Axis <br/>
+<form name="xAxisForm">
+    <input type="radio" name="xAxis"  value="1" checked="checked"/> ACRES
+    <input type="radio" name="xAxis"  value="2" /> HEADS PER ACRE
+    <input type="radio" name="xAxis"  value="3" /> ROW SPACING
+</form>
+
+Y-Axis <br/>
+<form name="yAxisForm">
+    <input type="radio" name="yAxis"  value="4" checked="checked"/> APP AREA
+    <input type="radio" name="yAxis"  value="5" /> SEEDS PER POUND
+</form>
+<br/>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<button class="btn success" type="button" onclick="loadChart()" id="chart">Load Chart</button>
+<br/>
+<script src="/charts.js"></script>

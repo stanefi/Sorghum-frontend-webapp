@@ -103,10 +103,16 @@ class MeasurementsController
         });
     }
 
+    // Shows chart
+    show_chart(req, res) {
+        if (!measurements_controller.user_logged_in(req, res)) return;
+        res.send(view.render('measurements/chart', {current_user: req.farmer}));
+    }
+
     // Shows the map
     map(req, res) {
-      if (!measurements_controller.user_logged_in(req, res)) return;
-        res.send(view.render('measurements/map', { user_panel: measurements_controller.generate_user_panel_html(req.farmer), current_user: req.farmer}));
+        if (!measurements_controller.user_logged_in(req, res)) return;
+        res.send(view.render('measurements/map', {current_user: req.farmer}));
     }
 
   /**
