@@ -46,7 +46,7 @@ class Session {
   // Ends a farmer session by flushing the session cookie.
   destroy(req, res) {
     req.session.reset();
-    res.end(view.render("session/delete", {farmer: {email: "Guest"}}));
+    res.end(view.partial("session/delete", {farmer: {email: "Guest"}}));
   }
 
 }
