@@ -23,6 +23,17 @@ var createDB = function() {
   });
 };
 
+var addCounties = function () {
+  Measurement.all(function (measurements) {
+    measurements.forEach(function (measurement) {
+      geocoder.someshit(function (shit) {
+        measurement.county = shit;
+        measurement.save();
+      })
+    })
+  })
+};
+
 // Add test data here:
 function addSeeds() {
   var m1 = Measurement.new({
@@ -78,6 +89,7 @@ function addSeeds() {
 
 module.exports = exports = {
   createDB: createDB,
+  addCounties: addCounties(),
   measurement: Measurement,
   farmer: Farmer
 };
