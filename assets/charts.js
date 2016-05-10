@@ -32,7 +32,7 @@ function drawChart(result) {
         joinedArr[i+1] = [result.xAxis.values[i], result.yAxis.values[i]];
     }
     var data = google.visualization.arrayToDataTable(joinedArr);
-    
+
     var options = {
         title: 'Scatter Chart',
         //curveType: 'function', // for line charts
@@ -47,7 +47,8 @@ function drawChart(result) {
             title: result.yAxis.name
         }
     };
-    var chart = new google.visualization.ScatterChart(document.getElementById('chart'));
+    document.getElementById('chart').style.visibility = 'hidden';
+    var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
 
