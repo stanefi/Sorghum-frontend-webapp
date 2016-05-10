@@ -111,6 +111,10 @@ table {
     width: 100%;
 }
 
+table.half_table {
+    width: 50%;
+}
+
 th{
     text-align: left;
     text-transform: uppercase;

@@ -1,7 +1,7 @@
 "use strict";
 var view = require('../view');
 var Measurements = require('../models/app_model').measurement;
-
+var db = require('../db');
 var GoogleMapsAPI = require('googlemaps');
 var Measurements = require('../models/app_model').measurement;
 var publicConfig = {
@@ -37,36 +37,36 @@ class MeasurementsController
     if (!measurements_controller.user_logged_in(req, res)) return;
 
 
-     Measurements.all(function (error, measurements) {
+    Measurements.all(function (error, measurements) {
 
-     for (var i = 0; i < measurements.length; i++){
+      for (var i = 0; i < measurements.length; i++){
 
-       var measurement = measurements[i];
-       var latlng = ParseDMS(measurement.latitude + " " + measurement.longitude);
+        var measurement = measurements[i];
+        var latlng = ParseDMS(measurement.latitude + " " + measurement.longitude);
 
-       var reverseGeocodeParams = {
-         "latlng":        latlng,
-         "result_type":   "administrative_area_level_2",
-         "language":      "en",
-         "location_type": "APPROXIMATE"
-       };
+        var reverseGeocodeParams = {
+          "latlng":        latlng,
+          "result_type":   "administrative_area_level_2",
+          "language":      "en",
+          "location_type": "APPROXIMATE"
+        };
 
-       gmAPI.reverseGeocode(reverseGeocodeParams, function(err, result){
-         console.log(result);
-         if(result[0]!=null && result[0].address_components[0].long_name!=null){
-           measurement.county = result[0].address_components[0].long_name;
+        gmAPI.reverseGeocode(reverseGeocodeParams, function(err, result){
+          console.log(result);
+          if(result[0]!=null && result[0].address_components[0].long_name!=null){
+            measurement.county = result[0].address_components[0].long_name;
 
-         }
-         else
-         {
-           measurement.county = "";
+          }
+          else
+          {
+            measurement.county = "";
 
-         }
+          }
 
 
-         measurement.save();
-       });
-     }
+          measurement.save();
+        });
+      }
     })
 
 
@@ -157,11 +157,14 @@ class MeasurementsController
     res.send(view.render('measurements/mapyield', {current_user: req.farmer}));
   }
 
+// Aggregate data
   counties(req, res) {
     if (!measurements_controller.user_logged_in(req, res)) return;
-    Measurements.all(function (error, measurements) {
-      if(error){
-        measurements_controller.render_error();
+    var that = this;
+    db.all('SELECT county, max(SEEDS_PER_POUND) AS "max", min(SEEDS_PER_POUND) AS "min", avg(SEEDS_PER_POUND) AS "avg"'+
+    ' FROM measurements GROUP BY county', function (error, measurements) {
+      if (error) {
+        console.log(error);
         return;
       }
       res.send(view.render('measurements/counties', { pages: measurements, current_user: req.farmer}));
