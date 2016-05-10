@@ -22,7 +22,8 @@ Y-Axis <br />
 
 
 <!--Charts end-->
-<table>
+<table id="measurements_table">
+  <thead>
   <tr>
     <th>ACRES</th>
     <th>HEADS PER ACRE</th>
@@ -32,12 +33,15 @@ Y-Axis <br />
     <th>Date</th>
     <th>Time</th>
     <th>Latitude</th>
-    <th>Longtitude</th>
+    <th>Longitude</th>
     <th>County</th>
     <th></th>
     <th></th>
   </tr>
-  <%= partial('measurements/_measurement', params.pages); %>
+  </thead>
+  <tbody>
+    <%= partial('measurements/_measurement', params.pages); %>
+  </tbody>
 </table>
 <form action="/measurements" method="POST">
   <button class="btn info" type="submit" onclick="exportData()" id="exportButton">Export data</button>
