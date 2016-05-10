@@ -28,15 +28,7 @@ var addCounties = function () {
 };
 
 // var addCounties = function () {
-//   Measurement.all(function (error, measurements) {
-//     for (var i = 0; i < measurements.length; i++){
-//       var measurement = measurements[i];
-//       geocoder.someshit(function (shit) {
-//         measurement.county = shit;
-//         measurement.save();
-//       })
-//     }
-//   })
+
 // };
 
 // Add test data here:

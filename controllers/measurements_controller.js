@@ -2,11 +2,74 @@
 var view = require('../view');
 var Measurements = require('../models/app_model').measurement;
 
+var GoogleMapsAPI = require('googlemaps');
+var Measurements = require('../models/app_model').measurement;
+var publicConfig = {
+  key: 'AIzaSyAJb3bdHTpR_y7uVY1pEqWLBQwG-ACCXt0',
+  stagger_time:       1000, // for elevationPath
+  encode_polylines:   false,
+  secure:             true, // use https
+};
+var gmAPI = new GoogleMapsAPI(publicConfig);
+
+function   ConvertDMSToDD(degrees, minutes, seconds, direction) {
+  var dd = parseInt(degrees) + parseInt(minutes)/60 + parseInt(seconds)/(60*60);
+
+  if (direction == "S" || direction == "W") {
+    dd = dd * -1;
+  } // Don't do anything for N or E
+  return dd;
+}
+
+function ParseDMS(input) {
+  var parts = input.split(/[^\d\w]+/);
+  var lat = ConvertDMSToDD(parts[0], parts[1], parts[2], parts[3]);
+  var lng = ConvertDMSToDD(parts[4], parts[5], parts[6], parts[7]);
+  return lng + "," + lat;
+}
+
+
+
 class MeasurementsController
 {
   // Render index page with all the measurements (accessibly only by logged user)
   index(req, res) {
     if (!measurements_controller.user_logged_in(req, res)) return;
+
+
+     Measurements.all(function (error, measurements) {
+
+     for (var i = 0; i < measurements.length; i++){
+
+       var measurement = measurements[i];
+       var latlng = ParseDMS(measurement.latitude + " " + measurement.longitude);
+
+       var reverseGeocodeParams = {
+         "latlng":        latlng,
+         "result_type":   "administrative_area_level_2",
+         "language":      "en",
+         "location_type": "APPROXIMATE"
+       };
+
+       gmAPI.reverseGeocode(reverseGeocodeParams, function(err, result){
+         console.log(result);
+         if(result[0]!=null && result[0].address_components[0].long_name!=null){
+           measurement.county = result[0].address_components[0].long_name;
+
+         }
+         else
+         {
+           measurement.county = "";
+
+         }
+
+
+         measurement.save();
+       });
+     }
+    })
+
+
     Measurements.all(function (error, measurements) {
       if(error){
         measurements_controller.render_error();
@@ -162,14 +225,7 @@ class MeasurementsController
 
 
 }
-function   ConvertDMSToDD(degrees, minutes, seconds, direction) {
-  var dd = parseInt(degrees) + parseInt(minutes)/60 + parseInt(seconds)/(60*60);
 
-  if (direction == "S" || direction == "W") {
-    dd = dd * -1;
-  } // Don't do anything for N or E
-  return dd;
-}
 
 
 var measurements_controller = new MeasurementsController();
