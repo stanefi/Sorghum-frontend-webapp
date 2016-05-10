@@ -152,6 +152,34 @@ div.user-panel {
 }
 
 div#map {
-  height: 600px;
-  width: 600px;
+    height: 600px;
+    width: 600px;
+}
+
+th.header {
+    /*background-image: url('/white-unsorted.gif');*/
+}
+
+th.tablesorter-headerUnSorted {
+    background: url('/white-unsorted.gif');
+    background-repeat: no-repeat;
+    background-size: 8px;
+    background-position: 90%;
+    background-color: #34495e;
+}
+
+th.tablesorter-headerAsc {
+    background: url('/white-asc.gif');
+    background-repeat: no-repeat;
+    background-size: 8px;
+    background-position: 90%;
+    background-color: #34495e;
+}
+
+th.tablesorter-headerDesc {
+    background-image: url('/white-desc.gif');
+    background-repeat: no-repeat;
+    background-size: 8px;
+    background-position: 90%;
+    background-color: #34495e;
 }
