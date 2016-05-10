@@ -164,7 +164,7 @@ th.tablesorter-headerUnSorted {
     background: url('/white-unsorted.gif');
     background-repeat: no-repeat;
     background-size: 8px;
-    background-position: 90%;
+    background-position: 95%;
     background-color: #34495e;
 }
 
@@ -172,7 +172,7 @@ th.tablesorter-headerAsc {
     background: url('/white-asc.gif');
     background-repeat: no-repeat;
     background-size: 8px;
-    background-position: 90%;
+    background-position: 95%;
     background-color: #34495e;
 }
 
@@ -180,6 +180,11 @@ th.tablesorter-headerDesc {
     background-image: url('/white-desc.gif');
     background-repeat: no-repeat;
     background-size: 8px;
-    background-position: 90%;
+    background-position: 95%;
+    background-color: #34495e;
+}
+
+th.no-sort {
+    background: none;
     background-color: #34495e;
 }
