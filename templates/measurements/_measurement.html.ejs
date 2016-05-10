@@ -8,6 +8,7 @@
   <td><%= params.date_time.substr(params.date_time.indexOf(' '),6) %></td>
   <td><%= params.longitude %></td>
   <td><%= params.latitude %></td>
+  <td><%= params.county %></td>
   <td><a class='btn success' href="/measurements/<%= params.id %>">show</a></td>
   <td><a class='btn danger' href="/measurements/<%= params.id %>/delete">remove</a></td>
 </tr>

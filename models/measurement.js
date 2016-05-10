@@ -7,7 +7,8 @@ var Measurement = {
   longitude: "decimal(12,9)",
   latitude:  "decimal(12,9)",
   date_time: "TEXT",
-  image_path: "TEXT"
+  image_path: "TEXT",
+  county: "TEXT"
 };
 
 module.exports = exports = Measurement;
