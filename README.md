@@ -13,6 +13,10 @@ Complete instructions manual for installing and configuring Sorghum-frontend app
      node -v
    * browserify
 
+   * mocha
+
+     npm install -g mocha
+
 ## Application install
     cd Sorghum-frontend-webapp
     npm install
@@ -34,3 +38,7 @@ Complete instructions manual for installing and configuring Sorghum-frontend app
 ## Database seeds (test data)
 
 To add more test data: open models/app_model.js and edit addSeeds() function
+
+
+## Run tests
+    mocha
