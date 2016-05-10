@@ -1,19 +1,27 @@
-<a class='btn back' href="/measurements">&larr; index</a>
+<a class='btn btn-primary' href="/measurements">&larr; index</a>
 <% content.title = "Page content" %>
-<h1><%= params.measurement.title %></h1>
-<dl>
-  <dt><strong>Description</strong></dt>
-    <dd><%= params.measurement.description %></dd>
+<h1><%= "Sorghum measurement ID: " + params.measurement.id  %></h1>
+<dl class="dl-horizontal">
+  <dt><strong>Acres</strong></dt>
+  <dd><%= params.measurement.ACRES %></dd>
+  <dt><strong>Heads per acre</strong></dt>
+  <dd><%= params.measurement.HEADS_PER_ACRE %></dd>
+  <dt><strong>Row spacing</strong></dt>
+  <dd><%= params.measurement.ROW_SPACING%></dd>
+  <dt><strong>App area</strong></dt>
+  <dd><%= params.measurement.APP_AREA%></dd>
+  <dt><strong>Seeds per pound</strong></dt>
+  <dd><%= params.measurement.SEEDS_PER_POUND%></dd>
+  <dt><strong>Date</strong></dt>
+  <dd><%= params.measurement.date_time.substr(0,params.measurement.date_time.indexOf(' '))%></dd>
+  <dt><strong>Time</strong></dt>
+  <dd><%= params.measurement.date_time.substr(params.measurement.date_time.indexOf(' '),6)%></dd>
+  <dt><strong>Latitude</strong></dt>
+  <dd><%= params.measurement.latitude %></dd>
+  <dt><strong>Longitude</strong></dt>
+  <dd><%= params.measurement.longitude %></dd>
+  <dt><strong>County</strong></dt>
+  <dd><%= params.measurement.county %></dd>
 </dl>
-<div class="post-content">
-  <%= params.measurement.content %>
-  <a class='btn success' href="/pages/<%= params.measurement.id %>/talk">switch to talk</a>
-</div>
-<div class="post-content">
-  <img src="/images/<%= params.measurement.image_path %>" alt="Sorghum Image">
 
-</div>
-
-
-<a class='btn info' href="/pages/<%= params.measurement.id %>/edit">edit content</a>
-
+<img src="/images/<%= params.measurement.image_path %>" alt="Sorghum Image">

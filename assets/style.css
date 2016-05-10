@@ -133,6 +133,11 @@ tr:nth-child(odd) {
     background-color: #ecf0f1;
 }
 
+dl {
+    border-top: 1px solid #7f8c8d;
+    border-bottom: 1px solid #7f8c8d;
+    padding: 10px 0;
+}
 
 div.post-content {
     border-top: 1px solid #7f8c8d;
