@@ -25,9 +25,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
               <li id="measurements"><a href="/measurements">Measurements</a></li>
-              <li id="mapyield"><a href="/mapyield">Yield Map</a></li>
+              <li id="counties"><a href="/counties">Counties</a></li>
+              <li id="mapyield"><a href="/mapyield">App Area Map</a></li>
               <li id="mapseeds"><a href="/mapseeds">Seeds Map</a></li>
-              <li id="chart"><a href="/chart">Chart</a></li>
+              <li id="chartt"><a href="/chart">Chart</a></li>
               <form class="navbar-form navbar-left" raction="/measurements" method="POST" >
                 <button type="submit" class="btn btn-default" onclick="exportData()" id="exportButton">Export data</button>
               </form>
@@ -48,12 +49,14 @@
   var tab = url.pop();
   if(tab=="measurements"){
     document.getElementById("measurements").className = "active";
+  } else if (tab=="counties"){
+    document.getElementById("counties").className = "active";
   } else if (tab=="mapyield"){
     document.getElementById("mapyield").className = "active";
   } else if (tab=="mapseeds"){
     document.getElementById("mapseeds").className = "active";
   } else if (tab=="chart"){
-    document.getElementById("chart").className = "active";
+    document.getElementById("chartt").className = "active";
   }
 </script>
 

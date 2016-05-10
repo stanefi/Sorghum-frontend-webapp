@@ -35,6 +35,7 @@ app.get('/graphData/:x/:y', measurements_controller.sendChartData);
 app.get('/mapyield', measurements_controller.mapyield);
 app.get('/mapseeds', measurements_controller.mapseeds);
 app.get('/chart', measurements_controller.show_chart);
+app.get('/counties', measurements_controller.counties);
 
 app.get('/signup', farmers_controller.signup);
 app.post('/farmers', farmers_controller.create);

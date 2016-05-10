@@ -193,3 +193,10 @@ th.no-sort {
     background: none;
     background-color: #34495e;
 }
+
+#legend {
+  background-color: #FFF;
+  border-radius: 3px;
+  padding: 3px;
+  margin: 10px;
+}
