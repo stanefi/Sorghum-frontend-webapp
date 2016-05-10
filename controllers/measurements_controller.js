@@ -94,6 +94,17 @@ class MeasurementsController
     res.send(view.render('measurements/mapyield', {current_user: req.farmer}));
   }
 
+  counties(req, res) {
+    if (!measurements_controller.user_logged_in(req, res)) return;
+    Measurements.all(function (error, measurements) {
+      if(error){
+        measurements_controller.render_error();
+        return;
+      }
+      res.send(view.render('measurements/counties', { pages: measurements, current_user: req.farmer}));
+    });
+  }
+
   /**
   * Maps a column of a database query into an array and
   * returns it with its description as an object
