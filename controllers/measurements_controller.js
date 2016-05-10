@@ -12,7 +12,7 @@ class MeasurementsController
         measurements_controller.render_error();
         return;
       }
-      res.send(view.render('measurements/index', { pages: measurements, user_panel: measurements_controller.generate_user_panel_html(req.farmer), current_user: req.farmer}));
+      res.send(view.render('measurements/index', { pages: measurements, current_user: req.farmer}));
     });
   }
 
@@ -24,7 +24,7 @@ class MeasurementsController
         measurements_controller.render_error(res);
         return;
       }
-      res.send(view.render('measurements/show', {measurement: measurement}));
+      res.send(view.render('measurements/show', {measurement: measurement, current_user: req.farmer}));
     });
   }
 
