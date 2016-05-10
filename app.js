@@ -32,7 +32,8 @@ app.get('/measurements/:id/delete', measurements_controller.destroy);
 app.post('/measurements', measurements_controller.export_data);
 
 app.get('/graphData/:x/:y', measurements_controller.sendChartData);
-app.get('/map', measurements_controller.map);
+app.get('/mapyield', measurements_controller.mapyield);
+app.get('/mapseeds', measurements_controller.mapseeds);
 app.get('/chart', measurements_controller.show_chart);
 
 app.get('/signup', farmers_controller.signup);
