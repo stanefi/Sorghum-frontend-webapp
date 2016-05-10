@@ -82,4 +82,36 @@ describe('App model - Measurements', function() {
         });
     });
 
+    it('Measurement - delete from DB', function(done) {
+        var new_measurement = Measurement.new(mockupMeasurement);
+        new_measurement.save(function (id) {
+            assert.ok(id);
+            Measurement.find(id, function (error, measurement) {
+                measurement.destroy(function () {
+                    Measurement.find(id, function (error, measurement) {
+                        assert.ok(error);
+                        assert.equal(measurement, undefined);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+
+    it('Measurement - get all', function(done) {
+        var new_measurement = Measurement.new(mockupMeasurement);
+        Measurement.all(function(error, measurements){
+            var size =  measurements.length;
+            new_measurement.save(function (id) {
+                Measurement.find(id, function (error, measurement) {
+                    Measurement.all(function(error, measurements2){
+                        var size2 =  measurements2.length;
+                        assert.equal(size + 1, size2)
+                        measurement.destroy();
+                        done();
+                    });
+                });
+            });
+        });
+    });
 });

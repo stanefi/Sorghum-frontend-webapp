@@ -76,11 +76,15 @@ class Record {
             }
         };
 
-        new_record.destroy = function() {
+        new_record.destroy = function(completion) {
             if(!this.id){
                 return;
             }
-            db.run('DELETE FROM ' + that.model_name + ' WHERE id=?', this.id);
+            db.run('DELETE FROM ' + that.model_name + ' WHERE id=?', this.id, function (error) {
+                if(completion){
+                    completion();
+                }
+            });
         };
 
         return new_record;
