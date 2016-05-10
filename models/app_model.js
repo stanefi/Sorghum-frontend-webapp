@@ -23,6 +23,10 @@ var createDB = function() {
   });
 };
 
+var addCounties = function () {
+
+};
+
 // var addCounties = function () {
 //   Measurement.all(function (error, measurements) {
 //     for (var i = 0; i < measurements.length; i++){
