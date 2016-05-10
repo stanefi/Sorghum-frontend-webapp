@@ -1,7 +1,6 @@
 "use strict";
 var view = require('../view');
 var Measurements = require('../models/app_model').measurement;
-var geocoder = require('geocoder');
 
 class MeasurementsController
 {
@@ -85,9 +84,14 @@ class MeasurementsController
   }
 
   // Shows the map
-  map(req, res) {
+  mapseeds(req, res) {
     if (!measurements_controller.user_logged_in(req, res)) return;
-    res.send(view.render('measurements/map', {current_user: req.farmer}));
+    res.send(view.render('measurements/mapseeds', {current_user: req.farmer}));
+  }
+
+  mapyield(req, res) {
+    if (!measurements_controller.user_logged_in(req, res)) return;
+    res.send(view.render('measurements/mapyield', {current_user: req.farmer}));
   }
 
   /**
